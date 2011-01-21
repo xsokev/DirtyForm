@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Test Dirty Form</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Kevin Armstrong">
+	<!-- Date: 2011-01-17 -->
+	<script src="../Assets/mootools-core.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../Source/DirtyForm.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		window.addEvent('domready', function(){
+			var df = new DirtyForm('frm', {
+				excludes: [ "txt2", "chk2" ]
+			});
+			$('bUpdate').addEvent('click', function(){
+				df.update();
+			});
+			$('bCheck').addEvent('click', function(){
+				if(df.isDirty()){
+					alert('the form has been modified');
+					console.log(df.dirtyFields);
+				} else {
+					alert("the form hasn't been modified");
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<form action="/" id="frm">
+		<fieldset>
+			<legend>Simple Text</legend>
+			<input name="txt1" value="My Value 1" />
+			<input id="txt2" name="txt2" value="My Value 2" />
+			<input name="txt3" type="password" value="hiddenpassword" />
+		</fieldset>
+		<fieldset>
+			<legend>Select Box</legend>
+			<select name="slc">
+				<option value="1">Item 1</option>
+				<option value="2">Item 2</option>
+				<option value="3" selected>Item 3</option>
+				<option value="4">Item 4</option>
+				<option value="5">Item 5</option>
+				<option value="6">Item 6</option>
+			</select>
+		</fieldset>
+		<fieldset>
+			<legend>Textarea</legend>
+			<textarea name="txtarea" rows="5" cols="100">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</textarea>
+		</fieldset>
+		<fieldset>
+			<legend>Radio Buttons</legend>
+			<input name="rdo" type="radio" value="1" checked />
+			<input name="rdo" type="radio" value="2" />
+			<input name="rdo" type="radio" value="3" />
+			<input name="rdo" type="radio" value="4" />
+		</fieldset>
+		<fieldset>
+			<legend>Checkboxes</legend>
+			<input name="chk" id="chk1" type="checkbox" value="1" checked />
+			<input name="chk" id="chk2" type="checkbox" value="2" checked />
+			<input name="chk3" id="chk3" type="checkbox" value="3" />
+			<input name="chk3" id="chk4" type="checkbox" value="4" />
+		</fieldset>
+		<input type="submit" value="submit" />
+		<button>Reset</button>
+	</form>
+	<button id="bUpdate">Update</button>
+	<button id="bCheck">Check</button>
+</body>
+</html>
