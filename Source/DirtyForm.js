@@ -15,6 +15,8 @@ var DirtyForm = (function(){
 	
 	var fieldValues = {};
 	var fields;
+	var resetField;
+	
 	var DF = new Class({
 		Implements: Options,
 		options: {
@@ -41,8 +43,15 @@ var DirtyForm = (function(){
 				}.bind(this));
 			}
 			if(this.options.updateOnReset){
+				resetField = new Element('input', { type: "text" });
+				this.element.grab(resetField);
 				this.element.addEvent('reset', function(e){
-					return this.update.delay(500);
+					var timer = function(){
+						if(resetField.value == ""){
+							clearInterval(timer);
+							this.update();
+						}
+					}.periodical(100, this);
 				}.bind(this));
 			}
 			if(this.options.excludes && this.options.excludes.length > 0){
@@ -65,6 +74,7 @@ var DirtyForm = (function(){
 					fieldValues[elm.id] = elm.value;
 				}
 			});
+			resetField.value = this.element.id+":updated";
 		},
 		isDirty: function(){
 			this.dirtyFields = [];

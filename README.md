@@ -25,6 +25,7 @@ Using DirtyForm is very simple.
 	var dirtyForm = new DirtyForm(frm, {
 		excludes: [], 				// form fields that you do not want to check
 		blockSubmitOnDirty: true,	// prevent form from submitting if it is dirty. Defaults to true.
+		updateOnReset: true,		// if true, the update command will be executed if the form is reset.
 		filterButtons: true			// not include buttons (<input type="submit" />, <input type="reset" />, <input type="button" />). Defaults to true.
 	);
 	
