@@ -43,7 +43,7 @@ var DirtyForm = (function(){
 				}.bind(this));
 			}
 			if(this.options.updateOnReset){
-				resetField = new Element('input', { type: "text" });
+				resetField = new Element('input', { type: "hidden" });
 				this.element.grab(resetField);
 				this.element.addEvent('reset', function(e){
 					var timer = function(){
