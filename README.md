@@ -22,23 +22,29 @@ How to use
 Using DirtyForm is very simple.
 
 	To initialize a form and its current values, instantiate a class as follows:
+
 	var dirtyForm = new DirtyForm(frm, {
 		excludes: [], 				// form fields that you do not want to check
 		blockSubmitOnDirty: true,	// prevent form from submitting if it is dirty. Defaults to true.
 		updateOnReset: true,		// if true, the update command will be executed if the form is reset.
-		filterButtons: true			// not include buttons (<input type="submit" />, <input type="reset" />, <input type="button" />). Defaults to true.
+		filterButtons: true			// not include buttons (input types "submit", "reset", "button"). Defaults to true.
 	);
 	
 	
 	If the form values change and you would like to capture the current state of the form, use the update() method.
+
 	dirtyForm.update();
 	
-	Update will store the form current values using the field id as the identifier. If no field id exists, a unique id will be generated and assigned to the field.
+	Update will store the form current values using the field id as the identifier. If no field id exists, a unique id 
+	will be generated and assigned to the field.
 	
 	To check if any of the form's values has been modified, use the isDirty() method.
+
 	dirtyForm.isDirty();
 	
-	After isDirty has been executed, the property "dirtyFields" of the class instance will contain a list of object for the fields whose values have changed since the last update. 
+	After isDirty has been executed, the property "dirtyFields" of the class instance will contain a list of object for 
+	the fields whose values have changed since the last update. 
+
 	dirtyForm.dirtyFields
 	
 	Each object contains:
@@ -50,7 +56,7 @@ Using DirtyForm is very simple.
 Demos
 -----
 
-
+http://jsfiddle.net/xsokev/5ENgz/
 
 
 License
