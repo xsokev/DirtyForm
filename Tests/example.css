@@ -1,0 +1,19 @@
+
+fieldset {
+	border: 1px solid #999;
+	font: .9em Verdana, sans-serif;
+	margin-bottom: 10px;
+	background-color: #fff;
+}
+fieldset *:focus {
+	background-color: #fef9d1;
+}
+form .button {
+	float: right;
+}
+button, .button {
+	border: 1px solid #888;
+	width: 80px; padding: 5px;
+	background-color: #dcdcdc;
+	margin-right: 10px;
+}

@@ -11,68 +11,79 @@ provides: DirtyForm
 ...
 */
 
-var DirtyForm = new Class({
-	Implements: Options,
-	options: {
-		excludes: [],
-		blockSubmitOnDirty: true,
-		filterButtons: true
-	},
-	initialize: function(elm, options) {
-		this.setOptions(options);
-		this.element = document.id(elm);
-		if(!(typeOf(this.element) == "element" && this.element.tagName == "FORM")){ return false; }
-		this.fields = this.element.getElements('input')
-			.combine(this.element.getElements('select'))
-			.combine(this.element.getElements('textarea'));
-		if(this.options.filterButtons){
-			this.fields = this.fields.filter(function(elm){
-				return (elm.tagName != "button" && elm.type != "submit");
-			});
-		}
-		if(this.options.blockSubmitOnDirty){
-			this.element.addEvent('submit', function(e){
-				return !this.isDirty();
-			}.bind(this));
-		}
-		if(this.options.excludes && this.options.excludes.length > 0){
-			this.fields = this.fields.filter(function(elm){
-				return !this.options.excludes.contains(elm.id);
-			}.bind(this));
-		}
-		this.fieldValues = {};
-		this.dirtyFields = [];
-		this.update();
-		return this;
-	},
-	update: function(){
-		this.fields.each(function(elm){
-			if(!elm.id){
-				elm.set('id', elm.tagName.toLowerCase()+'_'+(DirtyForm._idCounter++));
-			}
-			if(elm.type && (elm.type == "checkbox" || elm.type == "radio")) {
-				this.fieldValues[elm.id] = elm.checked;
-			} else {
-				this.fieldValues[elm.id] = elm.value;
-			}
-		}, this);
-	},
-	isDirty: function(){
-		this.dirtyFields = [];
-		this.fields.each(function(elm){
-			var val = elm.value;
-			if(elm.type && (elm.type == "checkbox" || elm.type == "radio")) {
-				val = elm.checked;
-			}
-			if(val != this.fieldValues[elm.id]){
-				this.dirtyFields.push({
-					field: $(elm.id),
-					oldValue: this.fieldValues[elm.id],
-					newValue: val
+var DirtyForm = (function(){
+	
+	var fieldValues = {};
+	var fields;
+	var DF = new Class({
+		Implements: Options,
+		options: {
+			excludes: [],
+			blockSubmitOnDirty: true,
+			updateOnReset: true,
+			filterButtons: true
+		},
+		initialize: function(elm, options) {
+			this.setOptions(options);
+			this.element = document.id(elm);
+			if(!(typeOf(this.element) == "element" && this.element.tagName == "FORM")){ return false; }
+			fields = this.element.getElements('input')
+				.combine(this.element.getElements('select'))
+				.combine(this.element.getElements('textarea'));
+			if(this.options.filterButtons){
+				fields = fields.filter(function(elm){
+					return (elm.tagName != "button" && elm.type != "submit" && elm.type != "reset");
 				});
 			}
-		}, this);
-		return this.dirtyFields.length > 0;
-	}
-});
-DirtyForm._idCounter = 1;
+			if(this.options.blockSubmitOnDirty){
+				this.element.addEvent('submit', function(e){
+					return !this.isDirty();
+				}.bind(this));
+			}
+			if(this.options.updateOnReset){
+				this.element.addEvent('reset', function(e){
+					return this.update.delay(500);
+				}.bind(this));
+			}
+			if(this.options.excludes && this.options.excludes.length > 0){
+				fields = fields.filter(function(elm){
+					return !this.options.excludes.contains(elm.id);
+				}.bind(this));
+			}
+			this.dirtyFields = [];
+			this.update();
+			return this;
+		},
+		update: function(){
+			fields.each(function(elm){
+				if(!elm.id){
+					elm.set('id', elm.tagName.toLowerCase()+'_'+(DirtyForm._idCounter++));
+				}
+				if(elm.type && (elm.type == "checkbox" || elm.type == "radio")) {
+					fieldValues[elm.id] = elm.checked;
+				} else {
+					fieldValues[elm.id] = elm.value;
+				}
+			});
+		},
+		isDirty: function(){
+			this.dirtyFields = [];
+			fields.each(function(elm){
+				var val = elm.value;
+				if(elm.type && (elm.type == "checkbox" || elm.type == "radio")) {
+					val = elm.checked;
+				}
+				if(val != fieldValues[elm.id]){
+					this.dirtyFields.push({
+						field: $(elm.id),
+						oldValue: fieldValues[elm.id],
+						newValue: val
+					});
+				}
+			}, this);
+			return this.dirtyFields.length > 0;
+		}
+	});
+	DF._idCounter = 1;
+	return DF;
+})();

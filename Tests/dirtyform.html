@@ -8,6 +8,7 @@
 	<meta name="generator" content="TextMate http://macromates.com/">
 	<meta name="author" content="Kevin Armstrong">
 	<!-- Date: 2011-01-17 -->
+	<link rel="stylesheet" href="example.css" type="text/css" media="screen">
 	<script src="../Assets/mootools-core.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../Source/DirtyForm.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
@@ -30,6 +31,9 @@
 	</script>
 </head>
 <body>
+	<button id="bUpdate">Update</button>
+	<button id="bCheck">Check</button>
+	<br/><br>
 	<form action="/" id="frm">
 		<fieldset>
 			<legend>Simple Text</legend>
@@ -67,10 +71,8 @@
 			<input name="chk3" id="chk3" type="checkbox" value="3" />
 			<input name="chk3" id="chk4" type="checkbox" value="4" />
 		</fieldset>
-		<input type="submit" value="submit" />
-		<button>Reset</button>
+		<input type="submit" value="Submit" class="button" />
+		<input type="reset" value="Reset" class="button" />
 	</form>
-	<button id="bUpdate">Update</button>
-	<button id="bCheck">Check</button>
 </body>
 </html>
