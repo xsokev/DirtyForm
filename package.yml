@@ -7,7 +7,7 @@ demo: http://kevinandre.com/dev/dirtyform/
 docs: https://github.com/xsokev/DirtyForm/blob/master/README.md
 license: MIT
 copyright: "&copy; [Kevin Armstrong](http://kevinandre.com/)"
-current: 0.1
+current: v1
 category: Forms
 
 sources:
