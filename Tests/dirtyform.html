@@ -14,18 +14,17 @@
 	<script type="text/javascript" charset="utf-8">
 		window.addEvent('domready', function(){
 			var df = new DirtyForm('frm', {
-				excludes: [ "txt2", "chk2" ]
+			    excludes: ["txt2", "chk2"]
 			});
-			$('bUpdate').addEvent('click', function(){
-				df.update();
+			$('bUpdate').addEvent('click', function() {
+			    df.update();
 			});
-			$('bCheck').addEvent('click', function(){
-				if(df.isDirty()){
-					alert('the form has been modified');
-					console.log(df.dirtyFields);
-				} else {
-					alert("the form hasn't been modified");
-				}
+			$('bCheck').addEvent('click', function() {
+			    if (df.isDirty()) {
+			        $("output").set('text', 'The form has been modified. ' + df.dirtyFields.length + ' fields were changed.');
+			    } else {
+			        $("output").set('text', "The form hasn't been modified");
+			    }
 			});
 		});
 	</script>
@@ -33,6 +32,7 @@
 <body>
 	<button id="bUpdate">Update</button>
 	<button id="bCheck">Check</button>
+	<span id="output"></span>
 	<br/><br>
 	<form action="/" id="frm">
 		<fieldset>

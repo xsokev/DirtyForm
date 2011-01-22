@@ -51,11 +51,12 @@ var DirtyForm = (function(){
 				}.bind(this));
 			}
 			if(this.options.updateOnReset){
-				resetField = new Element('input', { type: "hidden" });
+				resetField = new Element('input', { type: "text", styles: { display: "none" } });
 				this.element.grab(resetField);
 				this.element.addEvent('reset', function(e){
 					var timer = function(){
 						if(resetField.value == ""){
+							console.log( "been reset" );
 							clearInterval(timer);
 							this.update();
 						}
