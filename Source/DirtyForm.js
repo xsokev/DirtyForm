@@ -1,14 +1,21 @@
 /*
 ---
+
 name: DirtyForm
+
 description: Registers form elements and their values. Provides an isDirty function to determine if values have been changed.
+
 license: MIT-style
+
 authors: Kevin Armstrong
+
 requires: 
 	- Core/Class
 	- Core/Class.Extras
 	- Core/Array
-provides: DirtyForm
+	
+provides: [DirtyForm]
+
 ...
 */
 
