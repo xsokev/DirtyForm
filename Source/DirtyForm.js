@@ -14,7 +14,8 @@ requires:
 	- Core/Class.Extras
 	- Core/Array
 	
-provides: [DirtyForm]
+provides: 	
+	- DirtyForm
 
 ...
 */
@@ -104,4 +105,5 @@ var DirtyForm = (function(){
 	});
 	DF._idCounter = 1;
 	return DF;
+	
 })();
