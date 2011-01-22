@@ -1,11 +1,14 @@
-name: "DirtyForm"
-exports: "dirtyform.js"
-web: "[kevinandre.com](http://kevinandre.com)"
-description: "Registers form elements and their values. Provides an isDirty function to determine if values have been changed."
-license: "[MIT License]"
-copyright: "&copy; [Kevin Armstrong](http://kevinandre.com/)"
+name: DirtyForm
 author: xsokev
-version: "0.1"
+web: [kevinandre.com](http://kevinandre.com)
+description: Registers form elements and their values. Provides an isDirty function to determine if values have been changed.
+tags: [Forms]
+demo: http://kevinandre.com/dev/dirtyform/
+docs: https://github.com/xsokev/DirtyForm/blob/master/README.md
+license: MIT
+copyright: "&copy; [Kevin Armstrong](http://kevinandre.com/)"
+current: 0.1
+category: Forms
 
 sources:
   - "Source/DirtyForm.js"
